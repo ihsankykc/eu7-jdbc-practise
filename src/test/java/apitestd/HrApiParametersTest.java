@@ -3,6 +3,7 @@ package apitestd;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -17,15 +18,26 @@ public class HrApiParametersTest {
     @Test
     public void test1(){
         Response response = RestAssured.given().accept(ContentType.JSON)
-                .and().queryParam("q", "{region_id:2}")
+                .and().queryParam("q", "{\"region_id\":\"2\"}")
                 .when().get("/countries");
 
         Assert.assertEquals(response.statusCode(),200);
         Assert.assertEquals(response.contentType(),"application/json");
 
-        Assert.assertTrue(response.body().asString().contains("United States Of America"));
+        response.prettyPrint();
+        Assert.assertTrue(response.body().asString().contains("United States of America"));
+
+    }
+
+    @Test
+    public void test2(){
+        Response response = RestAssured.given().accept(ContentType.JSON)
+                .and().queryParam("q", "{\"job_id\":\"IT_PROG\"}")
+                .when().get("/employees");
 
 
-
+        Assert.assertEquals(response.statusCode(),200);
+        Assert.assertEquals(response.contentType(),"application/json");
+        Assert.assertTrue(response.body().asString().contains("IT_PROG"));
     }
 }
