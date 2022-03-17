@@ -1,11 +1,7 @@
-package apitestd;
+package apitests;
 
 import io.restassured.http.ContentType;
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
 import org.testng.annotations.Test;
-
-import java.util.List;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
@@ -51,5 +47,16 @@ public class HamcrestMatchersApiTest {
                         "teachers.lastName[0]",equalTo("Bond"),
                         "teachers.gender[0]",equalTo("Male"))
                 .log().all();
+    }
+
+    @Test
+    public void teachersWithDepartments(){
+        given().accept(ContentType.JSON)
+                .and().pathParam("name","Computer")
+                .when().log().all().get("http://api.cybertektraining.com/teacher/department/{name}")
+                .then().assertThat().statusCode(200)
+                .and().assertThat().contentType("application/json;charset=UTF-8")
+                .and().assertThat().body("teachers.firstName",hasItems("Alexander","Marteen"))
+                .log().body();
     }
 }

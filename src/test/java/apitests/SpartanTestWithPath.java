@@ -1,4 +1,4 @@
-package apitestd;
+package apitests;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -8,7 +8,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.List;
-import java.util.Optional;
 
 public class SpartanTestWithPath {
     @BeforeClass
