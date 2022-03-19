@@ -9,6 +9,7 @@ import utilities.ConfigurationReader;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import static io.restassured.RestAssured.*;
 import static org.testng.Assert.*;
@@ -29,6 +30,21 @@ public class DeleteRequestDemo {
         assertEquals(response.statusCode(),204);
 
 
+
+        response.prettyPrint();
+    }
+
+    @Test
+    public void deleteRandomSpartan(){
+        Random rn=new Random();
+        int id=rn.nextInt(100)+1;
+        System.out.println("This spartan id: = " + id + " will be deleted");
+
+        Response response=given().log().all()
+                .and().pathParam("id",id)
+                .when().delete("api/spartans/{id}");
+
+        assertEquals(response.statusCode(),204);
 
         response.prettyPrint();
     }

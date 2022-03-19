@@ -16,7 +16,7 @@ import static org.testng.Assert.*;
 
 public class SpartanLifeCycle {
 
-    int id;
+    int id=101;
 
     @BeforeClass
     public void beforeClass(){
