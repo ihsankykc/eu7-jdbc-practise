@@ -1,0 +1,13 @@
+Response : For verification
+    -status code
+    -Content type
+    -headers(contains,equalTo)
+    -body
+        *string,contains method
+        *path method
+        *jsonPath method
+        *Hemcrest matchers
+
+        ========DE-SERIALIZE=============
+        *JSON response to JAVA Collections
+        *JSON object to Java Class

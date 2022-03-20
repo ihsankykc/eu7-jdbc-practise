@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ListOfMapExample {
-    String dbUrl = "jdbc:oracle:thin:@54.91.219.9:1521:xe";
+    String dbUrl = "jdbc:oracle:thin:@54.91.2+19.9:1521:xe";
     String dbUsername = "hr";
     String dbPassword = "hr";
 

@@ -27,9 +27,15 @@ public class SpartanLifeCycle {
     public void PostNewSpartan(){
         Map<String,Object> requestMap=new HashMap<>();
 
-        requestMap.put("name","Mike");
-        requestMap.put("gender","Male");
-        requestMap.put("phone",8899445518l);
+        Faker faker = new Faker();
+
+        String name = faker.name().firstName();
+        String gender = faker.demographic().sex();
+        long phone = Long.parseLong(faker.numerify("##########"));
+
+        requestMap.put("name",name);
+        requestMap.put("gender",gender);
+        requestMap.put("phone",phone);
 
         given().accept(ContentType.JSON)
                 .and().contentType(ContentType.JSON)
@@ -38,9 +44,9 @@ public class SpartanLifeCycle {
                 .then().log().all().statusCode(201)
                 .and().contentType("application/json")
                 .and().body("success", equalTo("A Spartan is Born!"))
-                .and().body("data.name",equalTo("Mike"))
-                .and().body("data.gender",equalTo("Male"))
-                .and().body("data.phone",equalTo(8899445518l));
+                .and().body("data.name",equalTo(name))
+                .and().body("data.gender",equalTo(gender))
+                .and().body("data.phone",equalTo(phone));
 
     }
 
